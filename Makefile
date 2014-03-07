@@ -9,16 +9,14 @@ LIBRARY_LINK=$(CROSS)ar cr
 OUT=./OUT
 SRCDIR=./src
 
-LIBDIR_X264=/home/xy/mywork/libsrc/x264-snapshot-20140218-2245
-#LIBJDIR_JRTP=/home/xy/mywork/git/jrtplib
-LIBJDIR_JRTP=/workplace/mywork/git/jrtplib
+LIBDIR_X264= $(pwd)/extern_lib/x264-snapshot-20140218-2245
 #头文件
-INCLUDE= -I ./include -I$(LIBDIR_X264) -I$(LIBJDIR_JRTP)/src
+INCLUDE= -I ./include -I$(LIBDIR_X264) 
 
 
 #库文件
-LIBDIR= -L./lib  -L$(LIBDIR_X264) -L$(LIBJDIR_JRTP)/src
-LIBS =  -ljrtp -lpthread -ldl -ljthread
+LIBDIR= -L./lib  -L$(LIBDIR_X264) 
+LIBS = -lx264 
 LDLIBS=$(LIBDIR) $(LIBS)
 
 #编译选项
@@ -36,11 +34,13 @@ $(OUT)/%.o:$(SRCDIR)/%.c
 	$(CC) -c $< -o $@ $(CFLAGS)
 
 CPPOBJS = 
-CPPOBJS= 
+CPPOBJS= $(OUT)/x264encoder.o $(OUT)/PicSource.o
+$(SRCDIR)/x264encoder.cpp:$(SRCDIR)/x264encoder.h
+$(SRCDIR)/PicSource.cpp:$(SRCDIR)/PicSource.h
 
-test:$(OUT)/x264encoder.o $(CPPOBJS)
+test:$(OUT)/encoder.o $(CPPOBJS)
 	$(LINK) $@ $< $(CPPOBJS) $(CXXFLAGS) 	
-$(OUT)/x264encoder.o: $(SRCDIR)/x264encoder.cpp
+$(OUT)/encoder.o: $(SRCDIR)/encoder.cpp
 	$(CXX) -c $< -o $@ $(CXXFLAGS)
 
 
