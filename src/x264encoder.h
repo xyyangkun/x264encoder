@@ -1,5 +1,6 @@
 #ifndef  _X264ENCODER_H_
-#define _X264ENCODER_H_
+#define  _X264ENCODER_H_
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -8,6 +9,7 @@ extern "C" {
 #ifdef __cplusplus
 }
 #endif
+
 class x264encoder
 {
 /****************************************************

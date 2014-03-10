@@ -7,22 +7,29 @@
 
 #ifndef PICSOURCE_H_
 #define PICSOURCE_H_
-#include <queue>
+#ifdef __cplusplus
+extern "C" {
+#endif
+#include <stdint.h>
+#include "x264.h"
+#ifdef __cplusplus
+}
+#endif
+
+#include "FrameQueue.h"
 class PicSource
 {
 public:
-	enum PicType
-	{
-		YUV420 = 1,/*内存格式，不是平面格式，占 width*height*1.5*/
-		YUV422 = 2,/*内存格式，不是平面格式，占 width*height*2*/
-	};
-	PicSource(int iWidth, int iHeight,PicType pType=YUV420);
-	virtual ~PicSource();
+	PicSource(int i_csp,  int i_width, int i_height );
+	~PicSource();
+	static void delete_x264_picture(x264_picture_t* pic);
+	static x264_picture_t* get_x264_picture(int i_csp,  int i_width, int i_height );
 private:
-	PicType pType;
-	int iWidth,iHeight;
-	char *pPicBuf;
-	unsigned int uPicBufSize;
+	int csp,width,height;
+	FrameQueue<x264_picture_t*> pPicIn;
+
+private:
+	//线程
 
 
 };
