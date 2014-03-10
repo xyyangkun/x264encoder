@@ -1,8 +1,14 @@
-#if 0
+#if 1
+#include "PicSource.h"
 #include "x264encoder.h"
 int main(int argc, char** argv)
 {
-	x264encoder encoder(320, 240);
+	PicSource *ps = new PicSource(X264_CSP_I420,320, 240);
+	printf("d1\n");
+	x264encoder encoder(ps);
+	encoder.init();
+	printf("d2\n");
+	encoder.Start();
 }
 #else
 /**

@@ -28,7 +28,7 @@ int main()
 {
 	CamThread *G_pTimerThread;
 	cm = CamMutex::Create();
-	if(NULL == cm);
+	if(NULL == cm)
 		printf("debug0!\n");
 	cc = CamCondition::Create();
 

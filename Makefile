@@ -35,9 +35,9 @@ $(OUT)/%.o:$(SRCDIR)/%.c
 
 CPPOBJS = 
 CPPOBJS= $(OUT)/x264encoder.o $(OUT)/PicSource.o $(OUT)/osal.o $(OUT)/FrameQueue.o
-$(SRCDIR)/x264encoder.cpp:$(SRCDIR)/x264encoder.h
-$(SRCDIR)/PicSource.cpp:$(SRCDIR)/PicSource.h
 $(SRCDIR)/osal.cpp: $(SRCDIR)/osal.h 
+$(SRCDIR)/PicSource.cpp:$(SRCDIR)/PicSource.h
+$(SRCDIR)/x264encoder.cpp:$(SRCDIR)/x264encoder.h
 
 
 test:$(OUT)/encoder.o $(CPPOBJS)
